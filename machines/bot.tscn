@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://brfdn10dx1rfs"]
+
+[ext_resource type="Script" uid="uid://b5ch4jr3hm3gp" path="res://machines/bot.gd" id="1_kveao"]
+[ext_resource type="Texture2D" uid="uid://ejy6cemdocig" path="res://assets/sprites/machine-64.png" id="2_kveao"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kveao"]
+radius = 30.066593
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stwbx"]
+atlas = ExtResource("2_kveao")
+region = Rect2(0, 0, 64, 64)
+
+[node name="Bot" type="CharacterBody2D"]
+script = ExtResource("1_kveao")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kveao")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_stwbx")

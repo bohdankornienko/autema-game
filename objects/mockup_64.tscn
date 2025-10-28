@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwjhgaa46iln7"]
+
+[ext_resource type="Texture2D" uid="uid://c8awgvnrp1jt8" path="res://assets/sprites/random-stuff.png" id="1_iujo5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bvp3"]
+atlas = ExtResource("1_iujo5")
+region = Rect2(42, 5, 64, 64)
+
+[node name="Mockup64" type="Sprite2D"]
+texture = SubResource("AtlasTexture_1bvp3")

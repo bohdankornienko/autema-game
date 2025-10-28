@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://dytbynfs1y6"]
+
+[ext_resource type="Script" uid="uid://dxblc6f6umuux" path="res://gui/main_menu.gd" id="1_reecx"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_reecx")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Panel/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Middle" type="HBoxContainer" parent="Panel/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Rows/Middle"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonStart" type="Button" parent="Panel/MarginContainer/Rows/Middle"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
+text = "Start"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/Rows/Middle"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bottom" type="HBoxContainer" parent="Panel/MarginContainer/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[connection signal="button_up" from="Panel/MarginContainer/Rows/Middle/ButtonStart" to="." method="_on_button_start_button_up"]
