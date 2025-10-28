@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://csf83m04cq57w"]
+
+[ext_resource type="Texture2D" uid="uid://chgvyq3avsvrr" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://c8awgvnrp1jt8" path="res://assets/sprites/random-stuff.png" id="2_0xm2m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2yge"]
+atlas = ExtResource("2_0xm2m")
+region = Rect2(5, 5, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bvp3"]
+atlas = ExtResource("2_0xm2m")
+region = Rect2(42, 5, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lquwl"]
+atlas = ExtResource("2_0xm2m")
+region = Rect2(5, 74, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mycd"]
+atlas = ExtResource("2_0xm2m")
+region = Rect2(138, 5, 256, 256)
+
+[node name="Main" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(233, 168)
+texture = ExtResource("1_ig7tw")
+
+[node name="Mocukp32" type="Sprite2D" parent="."]
+position = Vector2(126, 264)
+texture = SubResource("AtlasTexture_h2yge")
+
+[node name="Mocukp33" type="Sprite2D" parent="."]
+position = Vector2(334, 270)
+texture = SubResource("AtlasTexture_h2yge")
+
+[node name="Mocukp34" type="Sprite2D" parent="."]
+position = Vector2(550, 199)
+texture = SubResource("AtlasTexture_h2yge")
+
+[node name="Mocukp35" type="Sprite2D" parent="."]
+position = Vector2(446, 825)
+texture = SubResource("AtlasTexture_h2yge")
+
+[node name="Mocukp36" type="Sprite2D" parent="."]
+position = Vector2(958, 564)
+texture = SubResource("AtlasTexture_h2yge")
+
+[node name="Mockup64" type="Sprite2D" parent="."]
+position = Vector2(576, 476)
+texture = SubResource("AtlasTexture_1bvp3")
+
+[node name="Mockup65" type="Sprite2D" parent="."]
+position = Vector2(1285, 367)
+texture = SubResource("AtlasTexture_1bvp3")
+
+[node name="Mockup66" type="Sprite2D" parent="."]
+position = Vector2(1282, 905)
+texture = SubResource("AtlasTexture_1bvp3")
+
+[node name="Mockup67" type="Sprite2D" parent="."]
+position = Vector2(701, 921)
+texture = SubResource("AtlasTexture_1bvp3")
+
+[node name="Mockup128" type="Sprite2D" parent="."]
+position = Vector2(463, 603)
+texture = SubResource("AtlasTexture_lquwl")
+
+[node name="Mockup129" type="Sprite2D" parent="."]
+position = Vector2(1462, 178)
+texture = SubResource("AtlasTexture_lquwl")
+
+[node name="Mockup130" type="Sprite2D" parent="."]
+position = Vector2(141, 958)
+texture = SubResource("AtlasTexture_lquwl")
+
+[node name="Mockup256" type="Sprite2D" parent="."]
+position = Vector2(887, 327)
+texture = SubResource("AtlasTexture_7mycd")
