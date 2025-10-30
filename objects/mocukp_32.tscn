@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://phqwknjno3n7"]
+[gd_scene load_steps=4 format=3 uid="uid://phqwknjno3n7"]
 
 [ext_resource type="Texture2D" uid="uid://c8awgvnrp1jt8" path="res://assets/sprites/random-stuff.png" id="1_prhps"]
 
@@ -6,5 +6,13 @@
 atlas = ExtResource("1_prhps")
 region = Rect2(5, 5, 32, 32)
 
-[node name="Mocukp32" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prhps"]
+size = Vector2(32, 32)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_h2yge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_prhps")
