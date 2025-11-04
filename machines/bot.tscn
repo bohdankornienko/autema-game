@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://brfdn10dx1rfs"]
+[gd_scene load_steps=28 format=3 uid="uid://brfdn10dx1rfs"]
 
 [ext_resource type="Script" uid="uid://b5ch4jr3hm3gp" path="res://machines/bot.gd" id="1_kveao"]
 [ext_resource type="Texture2D" uid="uid://ejy6cemdocig" path="res://assets/sprites/machine-64.png" id="2_kveao"]
@@ -6,15 +6,235 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_kveao"]
 radius = 30.066593
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_stwbx"]
+radius = 15.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_stwbx"]
 atlas = ExtResource("2_kveao")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="Animation" id="Animation_kveao"]
+resource_name = "standing"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EngineVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.3784, 0.41050667, 0.86, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_stwbx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EngineVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3784, 0.41050667, 0.86, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackPart:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.89, 0.4984, 0.4984, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iktd3"]
+resource_name = "moving"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EngineVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.8, 0.08000002, 0.09199982, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j66vv"]
+resource_name = "melee_attacking"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackPart:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.89, 0.4984, 0.4984, 0), Color(0.89, 0.4984, 0.4984, 1), Color(0.89, 0.4984, 0.4984, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iktd3"]
+_data = {
+&"RESET": SubResource("Animation_stwbx"),
+&"melee_attacking": SubResource("Animation_j66vv"),
+&"moving": SubResource("Animation_iktd3"),
+&"standing": SubResource("Animation_kveao")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ek0t"]
+animation = &"moving"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p3dda"]
+animation = &"moving"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ucof"]
+animation = &"moving"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6xcs8"]
+animation = &"moving"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_kveao"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5ek0t")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_p3dda")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_5ucof")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_6xcs8")
+blend_point_3/pos = Vector2(0, -1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kveao"]
+animation = &"standing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_stwbx"]
+animation = &"standing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iktd3"]
+animation = &"standing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j66vv"]
+animation = &"standing"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_stwbx"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_kveao")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_stwbx")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_iktd3")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_j66vv")
+blend_point_3/pos = Vector2(0, -1)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5ek0t"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ai1n"]
+advance_mode = 2
+advance_expression = "input_direction.length() > 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kveao"]
+advance_mode = 2
+advance_expression = "input_direction.length() == 0.0"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iktd3"]
+states/Runstate/node = SubResource("AnimationNodeBlendSpace2D_kveao")
+states/Runstate/position = Vector2(512, 134)
+states/StandState/node = SubResource("AnimationNodeBlendSpace2D_stwbx")
+states/StandState/position = Vector2(512, 18)
+transitions = ["Start", "StandState", SubResource("AnimationNodeStateMachineTransition_5ek0t"), "StandState", "Runstate", SubResource("AnimationNodeStateMachineTransition_2ai1n"), "Runstate", "StandState", SubResource("AnimationNodeStateMachineTransition_kveao")]
+graph_offset = Vector2(-153, -113)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j66vv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kveao"]
+states/MoveState/node = SubResource("AnimationNodeStateMachine_iktd3")
+states/MoveState/position = Vector2(533, 100)
+transitions = ["Start", "MoveState", SubResource("AnimationNodeStateMachineTransition_j66vv")]
+graph_offset = Vector2(-183, -132)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_stwbx"]
+graph_offset = Vector2(-182, -16)
+nodes/output/position = Vector2(360, 120)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_kveao")
+nodes/StateMachine/position = Vector2(40, 120)
+node_connections = [&"output", 0, &"StateMachine"]
+
 [node name="Bot" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_kveao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_kveao")
 
+[node name="MeleeAttackIndicator" type="ColorRect" parent="."]
+visible = false
+offset_left = 23.0
+offset_top = -14.0
+offset_right = 43.0
+offset_bottom = 14.0
+color = Color(1, 1, 1, 0.3254902)
+
+[node name="MeleeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MeleeShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_stwbx")
+target_position = Vector2(31, 0)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_stwbx")
+
+[node name="EngineVisual" type="ColorRect" parent="."]
+modulate = Color(0.3784, 0.41050667, 0.86, 1)
+offset_left = -23.0
+offset_top = -13.0
+offset_right = -8.0
+offset_bottom = 12.0
+color = Color(0.27752784, 0.2775277, 0.27752772, 0.7294118)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iktd3")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_stwbx")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/StateMachine/MoveState/Runstate/blend_position = Vector2(0.30715442, -0.13725495)
+parameters/StateMachine/MoveState/StandState/blend_position = Vector2(-0.598709, 0.39869285)
+
+[node name="AttackPart" type="Node2D" parent="."]
+modulate = Color(0.89, 0.4984, 0.4984, 0)
+
+[node name="Left" type="ColorRect" parent="AttackPart"]
+offset_left = -2.0
+offset_top = -16.0
+offset_right = 13.0
+offset_bottom = -7.0
+
+[node name="Right" type="ColorRect" parent="AttackPart"]
+offset_left = -2.0
+offset_top = 5.0
+offset_right = 13.0
+offset_bottom = 14.0
+
+[connection signal="timeout" from="MeleeTimer" to="." method="_on_melee_timer_timeout"]
