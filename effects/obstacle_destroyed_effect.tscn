@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cltdb7c3321w5"]
+
+[ext_resource type="Texture2D" uid="uid://c8awgvnrp1jt8" path="res://assets/sprites/random-stuff.png" id="1_ds0l8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8gcv"]
+atlas = ExtResource("1_ds0l8")
+region = Rect2(666, 20, 68, 91)
+
+[node name="ObstacleDestroyedEffect" type="CPUParticles2D"]
+modulate = Color(0.20310694, 0.557688, 0.8534937, 1)
+emitting = false
+texture = SubResource("AtlasTexture_q8gcv")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.64
+randomness = 0.25
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+
+[connection signal="finished" from="." to="." method="queue_free"]

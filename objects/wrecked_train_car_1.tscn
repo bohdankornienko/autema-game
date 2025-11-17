@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjvq4jjs4hjdi"]
+
+[ext_resource type="Texture2D" uid="uid://dg4hgf3h1x7f1" path="res://assets/sprites/world-objects.png" id="1_o51v2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2jk4"]
+atlas = ExtResource("1_o51v2")
+region = Rect2(0, 0, 640, 192)
+
+[node name="WreckedTrainCar1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_u2jk4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(11, -73, -55, -80, -100, -73, -292, -71, -292, 75, -239, 88, -155, 79, 78, 88, 96, 72, 298, 92, 316, -61, 34, -95)

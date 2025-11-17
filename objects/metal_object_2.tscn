@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2nf0cejqt6dy"]
+
+[ext_resource type="Texture2D" uid="uid://dg4hgf3h1x7f1" path="res://assets/sprites/world-objects.png" id="1_ppltt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkh7k"]
+atlas = ExtResource("1_ppltt")
+region = Rect2(64, 256, 64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo5hm"]
+size = Vector2(26, 26)
+
+[node name="MetalObject2" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hkh7k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bo5hm")

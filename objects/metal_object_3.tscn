@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b807cks40cj2o"]
+
+[ext_resource type="Texture2D" uid="uid://dg4hgf3h1x7f1" path="res://assets/sprites/world-objects.png" id="1_ffyym"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj1vw"]
+atlas = ExtResource("1_ffyym")
+region = Rect2(192, 256, 128, 128)
+
+[node name="MetalObject3" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hj1vw")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-52, -59, -14, -59, -12, 0, 7, 15, 57, 15, 57, 53, 2, 52, -10, 58, -55, 58, -55, 7, -50, -3)

@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://djnogl3nevjxt"]
+
+[ext_resource type="Script" uid="uid://bf7l5fr1nblh2" path="res://enemies/simple_robot_enemy.gd" id="1_djl37"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqttb"]
+radius = 25.019993
+
+[sub_resource type="Animation" id="Animation_djl37"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bapan"]
+resource_name = "chase"
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.640625, 0, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vqttb"]
+resource_name = "idle"
+length = 2.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.654902), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bapan"]
+_data = {
+&"RESET": SubResource("Animation_djl37"),
+&"chase": SubResource("Animation_bapan"),
+&"idle": SubResource("Animation_vqttb")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_djl37"]
+animation = &"chase"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vqttb"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_djl37"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bapan"]
+advance_mode = 2
+advance_expression = "is_player_in_detection_range()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5m3lh"]
+advance_mode = 2
+advance_expression = "not is_player_in_detection_range()"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bapan"]
+states/End/position = Vector2(915, 111)
+states/Start/position = Vector2(243, 111)
+states/chase/node = SubResource("AnimationNodeAnimation_djl37")
+states/chase/position = Vector2(532, 208)
+states/idle/node = SubResource("AnimationNodeAnimation_vqttb")
+states/idle/position = Vector2(532, 111)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_djl37"), "idle", "chase", SubResource("AnimationNodeStateMachineTransition_bapan"), "chase", "idle", SubResource("AnimationNodeStateMachineTransition_5m3lh")]
+graph_offset = Vector2(-201, -141)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5m3lh"]
+graph_offset = Vector2(-276.13055, 11.727169)
+nodes/output/position = Vector2(920, 60)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_bapan")
+nodes/StateMachine/position = Vector2(380, 100)
+node_connections = [&"output", 0, &"StateMachine"]
+
+[node name="SimpleRobotEnemy" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_djl37")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+rotation = 1.5707964
+color = Color(1, 0.41000003, 0.41000003, 1)
+polygon = PackedVector2Array(-31, 30, 29, 30, -1, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_vqttb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bapan")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_5m3lh")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
