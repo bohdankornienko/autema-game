@@ -268,7 +268,8 @@ nodes/StateMachine/position = Vector2(40, 120)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="Bot" type="CharacterBody2D" groups=["player"]]
-scale = Vector2(1.2, 1.2)
+collision_layer = 2
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_kveao")
 
@@ -276,11 +277,11 @@ script = ExtResource("1_kveao")
 shape = SubResource("CircleShape2D_kveao")
 
 [node name="MeleeAttackIndicator" type="ColorRect" parent="."]
-visible = false
-offset_left = 23.0
-offset_top = -14.0
-offset_right = 43.0
-offset_bottom = 14.0
+modulate = Color(1, 1, 1, 0.73333335)
+offset_left = 28.333332
+offset_top = -15.833332
+offset_right = 60.333332
+offset_bottom = 16.166668
 color = Color(1, 1, 1, 0.3254902)
 
 [node name="MeleeTimer" type="Timer" parent="."]
@@ -288,7 +289,7 @@ one_shot = true
 
 [node name="MeleeShapeCast2D" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_stwbx")
-target_position = Vector2(31, 0)
+target_position = Vector2(45, 0.8333333)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_stwbx")

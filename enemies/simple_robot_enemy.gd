@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/StateMachine/playback") as AnimationNodeStateMachinePlayback
+@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 const SPEED = 60
 
@@ -35,3 +36,15 @@ func is_player_in_detection_range() -> bool:
             result = true
 
     return result
+
+func can_see_player() -> bool:
+    if not is_player_in_detection_range(): return false
+
+    var player: = get_player()
+    if player is not PlayerBot: return false
+
+    ray_cast_2d.target_position = to_local(player.global_position) # - global_position # TODO: does not work
+    ray_cast_2d.force_raycast_update()
+    var player_in_sight: = not ray_cast_2d.is_colliding()
+
+    return player_in_sight

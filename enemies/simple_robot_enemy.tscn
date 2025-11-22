@@ -72,11 +72,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bapan"]
 advance_mode = 2
-advance_expression = "is_player_in_detection_range()"
+advance_expression = "can_see_player()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5m3lh"]
 advance_mode = 2
-advance_expression = "not is_player_in_detection_range()"
+advance_expression = "not can_see_player()"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bapan"]
 states/End/position = Vector2(915, 111)
@@ -86,18 +86,20 @@ states/chase/position = Vector2(532, 208)
 states/idle/node = SubResource("AnimationNodeAnimation_vqttb")
 states/idle/position = Vector2(532, 111)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_djl37"), "idle", "chase", SubResource("AnimationNodeStateMachineTransition_bapan"), "chase", "idle", SubResource("AnimationNodeStateMachineTransition_5m3lh")]
-graph_offset = Vector2(-201, -141)
+graph_offset = Vector2(-149, 81)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5m3lh"]
-graph_offset = Vector2(-276.13055, 11.727169)
 nodes/output/position = Vector2(920, 60)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_bapan")
 nodes/StateMachine/position = Vector2(380, 100)
 node_connections = [&"output", 0, &"StateMachine"]
 
 [node name="SimpleRobotEnemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_djl37")
+detection_range = 400
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 rotation = 1.5707964
@@ -117,3 +119,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeBlendTree_5m3lh")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)

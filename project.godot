@@ -58,6 +58,12 @@ dash={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.20392157, 0.20392157, 0.20392157, 1)

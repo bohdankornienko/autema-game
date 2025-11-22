@@ -928,6 +928,9 @@ position = Vector2(2368, -414)
 position = Vector2(-960, -437)
 
 [node name="SimpleRobotEnemy" parent="." instance=ExtResource("25_0odxb")]
-position = Vector2(-1304, 1098)
+position = Vector2(-1109, 1108)
+
+[node name="SimpleRobotEnemy2" parent="." instance=ExtResource("25_0odxb")]
+position = Vector2(-1066, 1010)
 
 [connection signal="body_entered" from="TheCore" to="." method="_on_area_2d_body_entered"]
