@@ -1,6 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://djnogl3nevjxt"]
+[gd_scene load_steps=23 format=3 uid="uid://djnogl3nevjxt"]
 
 [ext_resource type="Script" uid="uid://bf7l5fr1nblh2" path="res://enemies/simple_robot_enemy.gd" id="1_djl37"]
+[ext_resource type="Script" uid="uid://bdpma21nvt1ne" path="res://stats.gd" id="2_5m3lh"]
+[ext_resource type="Script" uid="uid://b8u24r6uqs3np" path="res://damage_boxes/hurtbox.gd" id="2_bapan"]
+[ext_resource type="Script" uid="uid://gdk5rmegn6n2" path="res://damage_boxes/hitbox.gd" id="4_eylxe"]
+
+[sub_resource type="Resource" id="Resource_eylxe"]
+script = ExtResource("2_5m3lh")
+metadata/_custom_type_script = "uid://bdpma21nvt1ne"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vqttb"]
 radius = 25.019993
@@ -54,15 +61,36 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.654902), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_5m3lh"]
+resource_name = "hit"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.29, 0.29, 0.29, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bapan"]
 _data = {
 &"RESET": SubResource("Animation_djl37"),
 &"chase": SubResource("Animation_bapan"),
+&"hit": SubResource("Animation_5m3lh"),
 &"idle": SubResource("Animation_vqttb")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_djl37"]
 animation = &"chase"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bapan"]
+animation = &"hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vqttb"]
 animation = &"idle"
@@ -78,15 +106,21 @@ advance_expression = "can_see_player()"
 advance_mode = 2
 advance_expression = "not can_see_player()"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eylxe"]
+advance_mode = 2
+advance_expression = "velocity == Vector2(0,0)"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bapan"]
 states/End/position = Vector2(915, 111)
 states/Start/position = Vector2(243, 111)
 states/chase/node = SubResource("AnimationNodeAnimation_djl37")
 states/chase/position = Vector2(532, 208)
+states/hit/node = SubResource("AnimationNodeAnimation_bapan")
+states/hit/position = Vector2(688, 111)
 states/idle/node = SubResource("AnimationNodeAnimation_vqttb")
 states/idle/position = Vector2(532, 111)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_djl37"), "idle", "chase", SubResource("AnimationNodeStateMachineTransition_bapan"), "chase", "idle", SubResource("AnimationNodeStateMachineTransition_5m3lh")]
-graph_offset = Vector2(-149, 81)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_djl37"), "idle", "chase", SubResource("AnimationNodeStateMachineTransition_bapan"), "chase", "idle", SubResource("AnimationNodeStateMachineTransition_5m3lh"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_eylxe")]
+graph_offset = Vector2(-212, -88)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5m3lh"]
 nodes/output/position = Vector2(920, 60)
@@ -94,17 +128,24 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_bapan")
 nodes/StateMachine/position = Vector2(380, 100)
 node_connections = [&"output", 0, &"StateMachine"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_djl37"]
+radius = 21.023796
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tggax"]
+radius = 25.0
+
 [node name="SimpleRobotEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_djl37")
 detection_range = 400
+stats = SubResource("Resource_eylxe")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 rotation = 1.5707964
 color = Color(1, 0.41000003, 0.41000003, 1)
-polygon = PackedVector2Array(-31, 30, 29, 30, -1, -40)
+polygon = PackedVector2Array(-26.999998, 25.000002, 25.000002, 24.999998, 29, 19.999998, 9.999999, -26, -9.000001, -26, -30, 21.000002)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -122,3 +163,23 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("2_bapan")
+metadata/_custom_type_script = "uid://b8u24r6uqs3np"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_djl37")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("4_eylxe")
+damage = 20
+metadata/_custom_type_script = "uid://gdk5rmegn6n2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_tggax")
+debug_color = Color(0.56485903, 0, 0.70196074, 0.41960785)

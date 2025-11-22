@@ -634,7 +634,7 @@ rotation = -0.2617994
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="Obstacle12" parent="ObstaclesManager" instance=ExtResource("10_4c57u")]
-position = Vector2(222, -8.999992)
+position = Vector2(279, 7.999996)
 rotation = -1.3089969
 
 [node name="Obstacle13" parent="ObstaclesManager" instance=ExtResource("10_4c57u")]

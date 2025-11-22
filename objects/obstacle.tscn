@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c84itrsqma0cn"]
+[gd_scene load_steps=5 format=3 uid="uid://c84itrsqma0cn"]
 
 [ext_resource type="Script" uid="uid://beorn4uwk3pco" path="res://objects/obstacle.gd" id="1_g5jnw"]
+[ext_resource type="Script" uid="uid://b8u24r6uqs3np" path="res://damage_boxes/hurtbox.gd" id="2_7421i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g5jnw"]
 radius = 32.140316
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jvp1h"]
+radius = 25.019993
 
 [node name="Obstacle" type="StaticBody2D" groups=["Destructible"]]
 script = ExtResource("1_g5jnw")
@@ -25,3 +29,12 @@ color = Color(0.342, 0.50970006, 0.6, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_g5jnw")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("2_7421i")
+metadata/_custom_type_script = "uid://b8u24r6uqs3np"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_jvp1h")
