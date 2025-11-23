@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c75brbrut11jc"]
+
+[ext_resource type="Texture2D" uid="uid://dtovmxi4o0t8" path="res://assets/effects/general_effects.png" id="1_bwh3b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_732bx"]
+atlas = ExtResource("1_bwh3b")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3e5c"]
+atlas = ExtResource("1_bwh3b")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrndp"]
+atlas = ExtResource("1_bwh3b")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77w3m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_732bx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3e5c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrndp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="EnemyDeathEffect" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_77w3m")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+
+[connection signal="animation_finished" from="." to="." method="queue_free"]

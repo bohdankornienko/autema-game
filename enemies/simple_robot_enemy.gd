@@ -8,13 +8,16 @@ extends CharacterBody2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 @onready var hurt_box: HurtBox = $HurtBox
 
+const HIT_EFFECT = preload("uid://dqpx62u7j33jw")
+const DEATH_EFFECT = preload("uid://c75brbrut11jc")
+
 const SPEED = 60
 const FRICTION = 500
 
 func _ready() -> void:
     stats = stats.duplicate()
     hurt_box.area_entered.connect(take_hit.call_deferred)
-    stats.no_health.connect(queue_free)
+    stats.no_health.connect(die)
 
 func _physics_process(delta: float) -> void:
     var state = playback.get_current_node()
@@ -37,7 +40,18 @@ func take_hit(other: Hitbox) -> void:
     stats.health -= other.damage
     velocity = other.knockback_direction * other.knockback_amount
     playback.start("hit")
+    var effect = HIT_EFFECT.instantiate()
+    effect.global_position = global_position
+    get_tree().current_scene.add_child(effect)
 
+
+func die() -> void:
+    var effect = DEATH_EFFECT.instantiate()
+    effect.rotation = rotation
+    effect.global_position = global_position
+    get_tree().current_scene.add_child(effect)
+
+    queue_free()
 
 func get_player() -> PlayerBot:
     return get_tree().get_first_node_in_group("player")

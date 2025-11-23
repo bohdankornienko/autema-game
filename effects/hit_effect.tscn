@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqpx62u7j33jw"]
+
+[ext_resource type="Texture2D" uid="uid://dtovmxi4o0t8" path="res://assets/effects/general_effects.png" id="1_odesf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ot2f"]
+atlas = ExtResource("1_odesf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elvhw"]
+atlas = ExtResource("1_odesf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lxv7"]
+atlas = ExtResource("1_odesf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfesk"]
+atlas = ExtResource("1_odesf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nh66h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ot2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elvhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lxv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfesk")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="HitEffect" type="AnimatedSprite2D"]
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_nh66h")
+autoplay = "default"
+frame = 3
+frame_progress = 0.2051145
+
+[connection signal="animation_finished" from="." to="." method="queue_free"]
