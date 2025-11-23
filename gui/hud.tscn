@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://e3sa62sf1k1i"]
+
+[ext_resource type="Script" uid="uid://4qj4xe4kj1sl" path="res://gui/hud.gd" id="1_jlk0s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ylv1g"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlk0s"]
+bg_color = Color(0.62109375, 0.30326843, 0.30326843, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_jlk0s")
+
+[node name="P" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ylv1g")
+
+[node name="MC" type="MarginContainer" parent="P"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Rows" type="VBoxContainer" parent="P/MC"]
+layout_mode = 2
+
+[node name="RowTop" type="HBoxContainer" parent="P/MC/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="HealthBar" type="ProgressBar" parent="P/MC/Rows/RowTop"]
+modulate = Color(1, 1, 1, 0.81960785)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.4
+theme_override_styles/fill = SubResource("StyleBoxFlat_jlk0s")
+value = 25.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="P/MC/Rows/RowTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RowMiddle" type="HBoxContainer" parent="P/MC/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 11.81
+theme_override_constants/separation = 10
+
+[node name="RowBottom" type="HBoxContainer" parent="P/MC/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10

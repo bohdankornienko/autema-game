@@ -1,5 +1,7 @@
 class_name PlayerBot extends CharacterBody2D
 
+signal died
+
 const METER = 64
 
 ## meters per second (where meter is 64 pixels)
@@ -75,3 +77,5 @@ func die() -> void:
     hide()
     remove_from_group("player")
     process_mode = Node.PROCESS_MODE_DISABLED
+
+    died.emit()

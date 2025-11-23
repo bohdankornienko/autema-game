@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://csf83m04cq57w"]
+[gd_scene load_steps=38 format=4 uid="uid://csf83m04cq57w"]
 
 [ext_resource type="Script" uid="uid://cbd72lxgfnb6x" path="res://main.gd" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c8awgvnrp1jt8" path="res://assets/sprites/random-stuff.png" id="2_0xm2m"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d07ejc3ud6y2f" path="res://assets/tilesets/general-64.png" id="4_d13ii"]
 [ext_resource type="PackedScene" uid="uid://cmw1e3e2h70np" path="res://mockups/mockup_128.tscn" id="5_kek77"]
 [ext_resource type="PackedScene" uid="uid://fh6gw7haj8ww" path="res://mockups/mockup_256.tscn" id="6_4c57u"]
-[ext_resource type="PackedScene" uid="uid://ba2qx3hp0kn3t" path="res://gui/you_won.tscn" id="8_kek77"]
+[ext_resource type="PackedScene" uid="uid://ba2qx3hp0kn3t" path="res://gui/you_loose.tscn" id="8_kek77"]
 [ext_resource type="PackedScene" uid="uid://dytbynfs1y6" path="res://gui/main_menu.tscn" id="9_4c57u"]
 [ext_resource type="Script" uid="uid://dxvk2ctu3rytu" path="res://obstacles_manager.gd" id="10_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://c84itrsqma0cn" path="res://objects/obstacle.tscn" id="10_4c57u"]
@@ -26,6 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://cs8ko8a2poh6s" path="res://objects/wrecked_train_car_2.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://c3nbo3gubb3yi" path="res://objects/metal_object_6.tscn" id="21_ryguw"]
 [ext_resource type="PackedScene" uid="uid://djnogl3nevjxt" path="res://enemies/simple_robot_enemy.tscn" id="25_0odxb"]
+[ext_resource type="PackedScene" uid="uid://e3sa62sf1k1i" path="res://gui/hud.tscn" id="27_a6jrf"]
+[ext_resource type="Resource" uid="uid://c5bu1bpa7j2y2" path="res://machines/bot_stats.tres" id="28_xuqvo"]
+[ext_resource type="PackedScene" uid="uid://1ewy5q0l871l" path="res://gui/you_won.tscn" id="29_qsp4k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
 atlas = ExtResource("3_ryguw")
@@ -595,6 +598,7 @@ texture = SubResource("AtlasTexture_ryguw")
 
 [node name="TheCore" type="Area2D" parent="."]
 position = Vector2(2442, 0)
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="TheCore"]
@@ -900,15 +904,9 @@ position = Vector2(-402.99997, -577)
 rotation = 0.5235988
 
 [node name="Bot" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(-1595, 909)
+position = Vector2(-1593, 910)
 move_speed = 3.0
 attack_speed = 3.0
-
-[node name="MainMenu" parent="." instance=ExtResource("9_4c57u")]
-visible = false
-
-[node name="YouWon" parent="." instance=ExtResource("8_kek77")]
-visible = false
 
 [node name="EnemiesManager" type="Node2D" parent="."]
 
@@ -924,13 +922,25 @@ position = Vector2(3275, 923)
 [node name="SimpleRobotEnemy4" parent="EnemiesManager" instance=ExtResource("25_0odxb")]
 position = Vector2(2368, -414)
 
+[node name="SimpleRobotEnemy6" parent="EnemiesManager" instance=ExtResource("25_0odxb")]
+position = Vector2(-1109, 1108)
+
+[node name="SimpleRobotEnemy7" parent="EnemiesManager" instance=ExtResource("25_0odxb")]
+position = Vector2(-1066, 1010)
+
 [node name="SimpleRobotEnemy5" parent="EnemiesManager" instance=ExtResource("25_0odxb")]
 position = Vector2(-960, -437)
 
-[node name="SimpleRobotEnemy" parent="." instance=ExtResource("25_0odxb")]
-position = Vector2(-1109, 1108)
+[node name="HUD" parent="." instance=ExtResource("27_a6jrf")]
+stats = ExtResource("28_xuqvo")
 
-[node name="SimpleRobotEnemy2" parent="." instance=ExtResource("25_0odxb")]
-position = Vector2(-1066, 1010)
+[node name="MainMenu" parent="." instance=ExtResource("9_4c57u")]
+visible = false
+
+[node name="YouLoose" parent="." instance=ExtResource("8_kek77")]
+visible = false
+
+[node name="YouWon" parent="." instance=ExtResource("29_qsp4k")]
+visible = false
 
 [connection signal="body_entered" from="TheCore" to="." method="_on_area_2d_body_entered"]

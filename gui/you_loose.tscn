@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://1ewy5q0l871l"]
+[gd_scene load_steps=2 format=3 uid="uid://ba2qx3hp0kn3t"]
 
-[node name="YouWon" type="CanvasLayer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8thhm"]
+bg_color = Color(0.66, 0.072600015, 0.072600015, 0.1764706)
+
+[node name="YouLoose" type="CanvasLayer"]
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -8,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8thhm")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
@@ -36,7 +40,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 84
-text = "Directive Accomplished!"
+text = "Directive Failed!"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,14 +1,10 @@
-[gd_scene load_steps=51 format=3 uid="uid://brfdn10dx1rfs"]
+[gd_scene load_steps=50 format=3 uid="uid://brfdn10dx1rfs"]
 
 [ext_resource type="Script" uid="uid://b5ch4jr3hm3gp" path="res://machines/bot.gd" id="1_kveao"]
-[ext_resource type="Script" uid="uid://bdpma21nvt1ne" path="res://stats.gd" id="2_iktd3"]
+[ext_resource type="Resource" uid="uid://c5bu1bpa7j2y2" path="res://machines/bot_stats.tres" id="2_j66vv"]
 [ext_resource type="Texture2D" uid="uid://ejy6cemdocig" path="res://assets/sprites/machine-64.png" id="2_kveao"]
 [ext_resource type="Script" uid="uid://gdk5rmegn6n2" path="res://damage_boxes/hitbox.gd" id="3_stwbx"]
 [ext_resource type="Script" uid="uid://b8u24r6uqs3np" path="res://damage_boxes/hurtbox.gd" id="5_j66vv"]
-
-[sub_resource type="Resource" id="Resource_j66vv"]
-script = ExtResource("2_iktd3")
-metadata/_custom_type_script = "uid://bdpma21nvt1ne"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stwbx"]
 atlas = ExtResource("2_kveao")
@@ -279,6 +275,33 @@ size = Vector2(50, 24)
 radius = 18.0
 height = 60.0
 
+[sub_resource type="Animation" id="Animation_5ucof"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_p3dda"]
 resource_name = "blink"
 length = 0.5
@@ -308,33 +331,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_5ucof"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6xcs8"]
 _data = {
 &"RESET": SubResource("Animation_5ucof"),
@@ -346,9 +342,10 @@ collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_kveao")
-stats = SubResource("Resource_j66vv")
+stats = ExtResource("2_j66vv")
 
 [node name="MeleeAttackIndicator" type="ColorRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.73333335)
 offset_left = 28.333332
 offset_top = -15.833332
