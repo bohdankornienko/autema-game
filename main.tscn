@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://csf83m04cq57w"]
+[gd_scene load_steps=40 format=4 uid="uid://csf83m04cq57w"]
 
 [ext_resource type="Script" uid="uid://cbd72lxgfnb6x" path="res://main.gd" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c8awgvnrp1jt8" path="res://assets/sprites/random-stuff.png" id="2_0xm2m"]
@@ -29,6 +29,8 @@
 [ext_resource type="PackedScene" uid="uid://e3sa62sf1k1i" path="res://gui/hud.tscn" id="27_a6jrf"]
 [ext_resource type="Resource" uid="uid://c5bu1bpa7j2y2" path="res://machines/bot_stats.tres" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://1ewy5q0l871l" path="res://gui/you_won.tscn" id="29_qsp4k"]
+[ext_resource type="AudioStream" uid="uid://m57dq3ijoka1" path="res://sound/public/background/Screen Saver.mp3" id="30_kq58d"]
+[ext_resource type="PackedScene" uid="uid://0k5s5wic0fbi" path="res://pauser.tscn" id="31_seu75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
 atlas = ExtResource("3_ryguw")
@@ -942,5 +944,15 @@ visible = false
 
 [node name="YouWon" parent="." instance=ExtResource("29_qsp4k")]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_kq58d")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="Pauser" parent="." instance=ExtResource("31_seu75")]
+process_mode = 3
 
 [connection signal="body_entered" from="TheCore" to="." method="_on_area_2d_body_entered"]

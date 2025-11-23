@@ -23,6 +23,7 @@ const METER = 64
 @onready var hitbox: Hitbox = $Hitbox
 @onready var hurt_box: HurtBox = $HurtBox
 @onready var blink_animation_player: AnimationPlayer = $BlinkAnimationPlayer
+@onready var hurt_audio_stream_player: AudioStreamPlayer = $HurtAudioStreamPlayer
 
 var can_attack: bool = true
 var input_direction = Vector2.ZERO
@@ -36,6 +37,7 @@ func _ready() -> void:
     stats.no_health.connect(die)
 
 func take_hit(other: Hitbox) -> void:
+    hurt_audio_stream_player.play()
     stats.health -= other.damage
     blink_animation_player.play("blink")
 

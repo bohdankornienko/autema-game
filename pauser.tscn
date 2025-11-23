@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://0k5s5wic0fbi"]
+
+[ext_resource type="Script" uid="uid://d32p4qimhnrow" path="res://pauser.gd" id="1_mgbip"]
+[ext_resource type="AudioStream" uid="uid://crggfog5yrxuu" path="res://sound/public/fx/ChipShop_YM_Arp_E_14.wav" id="2_0fmmr"]
+[ext_resource type="AudioStream" uid="uid://byv4i6n3oskkf" path="res://sound/public/fx/ChipShop_YM_Arp_D#m_10.wav" id="3_nbo65"]
+
+[node name="Pauser" type="Node"]
+script = ExtResource("1_mgbip")
+
+[node name="PauseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0fmmr")
+
+[node name="UnpauseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nbo65")

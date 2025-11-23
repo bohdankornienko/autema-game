@@ -10,7 +10,6 @@ func _ready() -> void:
     bot.died.connect(_on_player_died)
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-    print("The core")
     overlay_you_won.show()
     get_tree().paused = true
 
